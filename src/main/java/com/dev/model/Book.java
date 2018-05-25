@@ -1,4 +1,4 @@
-package src.main.java.com.dev.model;
+package com.dev.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +17,7 @@ public class Book {
     private String descr;
 
     @Column (name ="no_of_pages")
-    private int nb_pages;
+    private int nPages;
 
     private Float cost;
     private String isbn;
@@ -71,4 +71,16 @@ public class Book {
         this.lang = lang;
     }
 
+    public Book(String isbn, String title, Float unitCost, Integer nbOfPages, Language language, String description) {
+        this.isbn = isbn;
+        this.title = title;
+        this.cost = unitCost;
+        this.nPages = nbOfPages;
+        this.lang = language;
+        this.descr = description;
+    }
+
+    public Book() {
+
+    }
 }

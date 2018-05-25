@@ -1,4 +1,4 @@
-package src.main.java.com.dev.model;
+package com.dev.model;
 
 public enum Language {
     ENGLISH,
@@ -8,5 +8,5 @@ public enum Language {
     CHINESE,
     TELUGU,
     TAMIL,
-    URDU;
+    URDU,
 }

@@ -2,6 +2,9 @@
 
 import com.dev.model.Book;
 import com.dev.model.Language;
+import com.dev.util.ISBNGenerator;
+import com.dev.util.NumGenerator;
+import com.dev.util.TextUtil;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -27,6 +30,9 @@ public class BookRepositoryTest {
                 .addClass(BookRepository.class)
                 .addClass(Book.class)
                 .addClass(Language.class)
+                .addClass(TextUtil.class)
+                .addClass(NumGenerator.class)
+                .addClass(ISBNGenerator.class)
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml");
     }

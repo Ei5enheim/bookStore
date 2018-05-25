@@ -1,7 +1,10 @@
 package com.dev.repository;
 
 import com.dev.model.Book;
+import com.dev.util.NumGenerator;
+import com.dev.util.TextUtil;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
@@ -18,13 +21,22 @@ public class BookRepository {
     @PersistenceContext(unitName = "bookStorePU")
     private EntityManager em;
 
+    @Inject
+    private TextUtil txtUtil;
+
+    @Inject
+    private NumGenerator gen;
+
     public Book find (@NotNull Long id) {
         return em.find(Book.class, id);
     }
 
     @Transactional(REQUIRED)
     public Book create (@NotNull Book book) {
+        book.setTitle(txtUtil.sanitize(book.getTitle()));
+        book.setIsbn(gen.genNumber());
         em.persist(book);
+
         return book;
     }
 

@@ -9,6 +9,7 @@
 plugins {
     // Apply the java-library plugin to add support for Java Library
     id 'java-library'
+
 }
 
 dependencies {
@@ -21,7 +22,11 @@ dependencies {
     implementation 'javax:javaee-api:7.0'
 
     // Use JUnit test framework
-    testImplementation 'junit:junit:4.12'
+    testCompile 'junit:junit:4.12'
+    //implementation 'org.arquillian:arquillian-universe:2.0.2'
+    testCompile 'org.jboss.arquillian:arquillian-junit:libraryVersions.arquillian'
+    implementation 'org.jboss.shrinkwrap:shrinkwrap-api:1.2.6'
+    implementation 'org.wildfly:wildfly-arquillian-container-remote:8.2.1.Final'
 
 
 }
@@ -32,6 +37,14 @@ repositories {
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
     mavenCentral()
+    mavenRepo urls: 'http://repository.jboss.org/nexus/content/groups/public'
 }
 
+
+task copyToLib(type: Copy) {
+    into "lib"
+    from configurations.runtime
+}
+
+build.dependsOn(copyToLib)
 apply plugin: 'war'

@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Book {
@@ -11,9 +13,11 @@ public class Book {
     private Long id;
 
     @Column (length = 100)
+    @NotNull @Size(min = 1, max= 200)
     private String title;
 
-    @Column (length = 200)
+    @Column (length = 1000)
+    @Size(min = 1, max= 1000)
     private String descr;
 
     @Column (name ="no_of_pages")

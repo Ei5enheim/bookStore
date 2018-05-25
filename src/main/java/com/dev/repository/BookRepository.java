@@ -7,6 +7,8 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
+import javax.validation.constraints.NotNull;
+
 import static javax.transaction.Transactional.TxType.REQUIRED;
 import static javax.transaction.Transactional.TxType.SUPPORTS;
 
@@ -16,12 +18,12 @@ public class BookRepository {
     @PersistenceContext(unitName = "bookStorePU")
     private EntityManager em;
 
-    public Book find (Long id) {
+    public Book find (@NotNull Long id) {
         return em.find(Book.class, id);
     }
 
     @Transactional(REQUIRED)
-    public Book create (Book book) {
+    public Book create (@NotNull Book book) {
         em.persist(book);
         return book;
     }

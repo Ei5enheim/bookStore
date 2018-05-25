@@ -7,6 +7,7 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import com.dev.repository.BookRepository;
 
@@ -28,6 +29,17 @@ public class BookRepositoryTest {
                 .addClass(Language.class)
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml");
+    }
+
+    @Test (expected = Exception.class)
+    public void createInvalidBook() {
+        Book b = new Book("isbn", null, 10.0f, 10, Language.ENGLISH,"adsadas");
+        bookRepo.create(b);
+    }
+
+    @Test (expected = Exception.class)
+    public void findInvalidId() {
+        bookRepo.find(null);
     }
 
     @org.junit.Test
